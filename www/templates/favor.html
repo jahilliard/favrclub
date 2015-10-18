@@ -1,9 +1,9 @@
 <ion-view view-title="favor">
   <ion-nav-bar class="bar-energized">
     <ion-nav-back-button></ion-nav-back-button>
-    <ion-nav-buttons side="left"> 
-    	<button class="button button-icon button-clear ion-navicon" menu-toggle="left"> </button> 
-	</ion-nav-buttons> 
+    <ion-nav-buttons side="left">
+    	<button class="button button-icon button-clear ion-navicon" menu-toggle="left"> </button>
+	</ion-nav-buttons>
   </ion-nav-bar>
   <ion-content>
     <div id="list">
@@ -18,8 +18,8 @@
     </div>
 
     <div class="button-bar">
-	  <a class="button button-energized" href="#/app/favors">Confirm</a>
-	  <a class="button button-energized" href="#/app/favors">Cancel</a>
-	</div>  
+	  <a class="button button-energized" href="#/app/favors" ng-click="favorDel()">Confirm</a>
+	  <a class="button button-energized" href="#/app/favors" ng-click="favorDel()">Cancel</a>
+	</div>
   </ion-content>
 </ion-view>

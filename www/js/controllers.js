@@ -21,7 +21,7 @@ angular.module('starter.controllers', [])
    }
 })
 
-.controller('FavorsCtrl', function($scope, $http) {
+.controller('FavorsCtrl', function($scope, $http,  $ionicModal) {
   $scope.favors = [
     { username: 'Wii', id: 1, item: 'Colgate 360 Optic White Toothbrush ', price: '10', location: '1069 Morewood Avenue, Pittsburgh PA' },
     { username: '', id: 2, item: 'Cooler', price: '20', location: '5000 Forbes Avenue' },
@@ -30,12 +30,44 @@ angular.module('starter.controllers', [])
     { username: 'Akash', id: 5, item: 'Pack of 10 pencils', price: '10', location: 'Beeler, Pittburgh PA' },
     { username: 'Weikun', id: 6, item: 'Stapler', price: '3', location: '1069 Morewood Avenue, Pittsburgh PA' }
   ];
-  $http.get('http://localhost:3000/favors').
-     then(function(response) {
-       console.log(response.data.favors + "     " + response.data.users);
-     }, function(response) {
-       console.log("Error " + response.data.error)
-     });
+
+  $scope.doRefresh = function(){
+
+    $http.get('http://localhost:3000/favors').
+       then(function(response) {
+         console.log(response.data.favors + "     " + response.data.users);
+       }, function(response) {
+         console.log("Error " + response.data.error)
+       });
+
+       $scope.$broadcast('scroll.refreshComplete');
+       $scope.$apply();
+  }
+
+
+     $ionicModal.fromTemplateUrl('templates/mylongform.html', {
+         scope: $scope,
+         animation: 'slide-in-up'
+       }).then(function(modal) {
+         $scope.modal = modal;
+       });
+
+     $scope.openModal = function(){
+       console.log("OPEN MODEL");
+       $scope.modal.show();
+     }
+     $scope.closeModal = function(){
+       $scope.modal.hide();
+     }
+     $scope.createItem = function(item) {
+       $scope.shoppings.push({
+         description: item.description,
+         price: item.price,
+         live: item.live
+       });
+       $scope.modal.hide();
+     };
+
 })
 
 .controller('ShoppingCtrl', function($scope, $ionicModal) {
@@ -92,4 +124,7 @@ angular.module('starter.controllers', [])
 
 
 .controller('FavorCtrl', function($scope, $stateParams) {
+  $scope.favorDel = function(){
+    console.log("DELETE FAVOR IN VIEW");
+  }
 });

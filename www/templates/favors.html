@@ -4,11 +4,11 @@
     <ion-nav-buttons side="left">
     	<button class="button button-icon button-clear ion-navicon" menu-toggle="left"> </button>
 	   </ion-nav-buttons>
-     <ion-nav-buttons ng-click="openModal()" href="#/app/add" side="right">
-       <button class="button button-icon button-clear ion-ios-compose-outline" menu-toggle="right"> </button>
+     <ion-nav-buttons ng-click="openModal()" href="templates/mylongform.html" side="right">
+       <button ng-click="openModal()" class="button button-icon button-clear ion-ios-compose-outline" menu-toggle="right"> </button>
      </ion-nav-buttons>
   </ion-nav-bar>
-  <ion-content>
+  <ion-content = "TodosCtrl">
     <div class="list list-inset">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
@@ -17,6 +17,9 @@
       </label>
     </div>
     <div id="list">
+
+      <ion-refresher pulling-text= "Pull to refresh" on-refresh = "doRefresh()">
+      </ion-refresher>
 
       <div ng-repeat="favor in favors" href="#/app/favors/{{favor.id}}">
         <a class="item item-avatar" href="#/app/favors/{{favor.id}}">
