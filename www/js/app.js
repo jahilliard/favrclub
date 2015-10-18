@@ -77,7 +77,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngAutocomplete'])
         }
       }
     })
-
+    .state('app.add', {
+      url: '/add',
+      views: {
+            'menuContent': {
+              templateUrl: 'templates/addFavor.html',
+              controller: 'AddCtrl'
+            }
+      }
+    })
   .state('app.single', {
     url: '/favors/:favorId',
     views: {

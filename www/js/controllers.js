@@ -57,6 +57,7 @@ angular.module('starter.controllers', [])
     });
 
   $scope.openModal = function(){
+    console.log("OPEN MODEL");
     $scope.modal.show();
   }
   $scope.closeModal = function(){
@@ -84,6 +85,9 @@ angular.module('starter.controllers', [])
     { username: 'Weikun', id: 1, item: 'Colgate 360 Optic White Toothbrush ', price: '10', location: '1069 Morewood Avenue, Pittsburgh PA'},
   ];
 
+})
+.controller('AddCtrl', function($scope) {
+  console.log("ADDING CONTROLLER");
 })
 
 
