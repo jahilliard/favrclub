@@ -7,9 +7,11 @@
   </ion-nav-bar>
   <ion-content>
     <div id="list">
+
+    <div ng-controller="FavorsCtrl">
 	    <a class="item item-avatar" href="#">
 	      <img src="img/weikun.jpg">
-	      <h2>Weikun</h2>
+	      <h2>{{favor1[4].username}}</h2>
 	      <p>Toothbrush<br>
 		  <i class="icon ion-location"></i>
 		  1069 Morewood Ave</p>
@@ -21,5 +23,15 @@
 	  <a class="button button-energized" href="#/app/favors" ng-click="favorDel()">Confirm</a>
 	  <a class="button button-energized" href="#/app/favors" ng-click="favorDel()">Cancel</a>
 	</div>
+	<div id = "cardCheckout">
+	<form action="/charge" method="POST">
+		<div ng-include="templateId.html"></div>
+	</form>
+
+	</div>
   </ion-content>
 </ion-view>
+
+
+
+ 

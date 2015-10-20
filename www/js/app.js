@@ -87,7 +87,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngAutocomplete'])
     views: {
       'menuContent': {
         templateUrl: 'templates/favor.html',
-        controller: 'FavorCtrl'
+        controller: 'FavorsCtrl'
       }
     }
   });
