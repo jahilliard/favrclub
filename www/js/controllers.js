@@ -1,4 +1,23 @@
 angular.module('starter.controllers', [])
+.run(function($rootScope, $templateCache) {
+    $templateCache.put('templateId.html', 'This is the content of the template');
+    $rootScope.favor1 = [
+    { username: 'Wii', id: 1, item: 'Colgate 360 Optic White Toothbrush ', price: '10', location: '1069 Morewood Avenue, Pittsburgh PA' },
+    { username: '', id: 2, item: 'Cooler', price: '20', location: '5000 Forbes Avenue' },
+    { username: 'Akfdsfdsash', id: 3, item: 'Eyedrops', price: '7', location: 'Beeler, Pittburgh PA' },
+    { username: 'Akash', id: 4, item: 'IS Shirt', price: '20', location: 'Beeler, Pittburgh PA' },
+    { username: 'Akash', id: 5, item: 'Pack of 10 pencils', price: '10', location: 'Beeler, Pittburgh PA' },
+    { username: 'Weikun', id: 6, item: 'Stapler', price: '3', location: '1069 Morewood Avenue, Pittsburgh PA' },
+        { username: 'Weikun', id: 7, item: 'Stapler', price: '3', location: '1069 Morewood Avenue, Pittsburgh PA' }
+
+  ];
+
+  $rootScope.shoppingList = [
+    { description: 'Eyedrops', price: '4', live: '4 days' },
+    { description: 'Bag', price: '20', live: '3 hours' },
+  ];
+
+})
 
 .controller('SignInCtrl', function($scope, $state, $http) {
 
@@ -21,15 +40,9 @@ angular.module('starter.controllers', [])
    }
 })
 
-.controller('FavorsCtrl', function($scope, $http,  $ionicModal) {
-  $scope.favors = [
-    { username: 'Wii', id: 1, item: 'Colgate 360 Optic White Toothbrush ', price: '10', location: '1069 Morewood Avenue, Pittsburgh PA' },
-    { username: '', id: 2, item: 'Cooler', price: '20', location: '5000 Forbes Avenue' },
-    { username: 'Akash', id: 3, item: 'Eyedrops', price: '7', location: 'Beeler, Pittburgh PA' },
-    { username: 'Akash', id: 4, item: 'IS Shirt', price: '20', location: 'Beeler, Pittburgh PA' },
-    { username: 'Akash', id: 5, item: 'Pack of 10 pencils', price: '10', location: 'Beeler, Pittburgh PA' },
-    { username: 'Weikun', id: 6, item: 'Stapler', price: '3', location: '1069 Morewood Avenue, Pittsburgh PA' }
-  ];
+.controller('FavorsCtrl', function($scope, $http,  $ionicModal, $stateParams, $rootScope ) {
+  $scope.favors = $rootScope.favor1;
+  $scope.stateParameters = $stateParams.favorId;
 
   $scope.doRefresh = function(){
 
@@ -44,6 +57,27 @@ angular.module('starter.controllers', [])
        $scope.$apply();
   }
 
+   $scope.favorDel = function(){
+
+      var newShoppingItem = $rootScope.favor1.splice($stateParams.favorId, 1);
+      console.log(newShoppingItem[0]);
+      console.log(newShoppingItem[0].item);
+
+
+
+       var standardList = {description: 'Eyedrops', price: '4', live: '4 days' };
+       standardList.description =  newShoppingItem[0].item;
+       standardList.price = newShoppingItem[0].price;
+
+
+      $rootScope.shoppingList.push(standardList);
+
+
+        console.log($rootScope.shoppingList);
+ 
+
+   }
+      $scope.favors = $rootScope.favor1;
 
      $ionicModal.fromTemplateUrl('templates/mylongform.html', {
          scope: $scope,
@@ -60,22 +94,24 @@ angular.module('starter.controllers', [])
        $scope.modal.hide();
      }
      $scope.createItem = function(item) {
-       $scope.shoppings.push({
+       $rootScope.shoppingList.push({
          description: item.description,
          price: item.price,
          live: item.live
        });
+       console.log("in create item");
+       console.log( $rootScope.shoppingList);
+              console.log("still in create item");
+
        $scope.modal.hide();
      };
 
 })
 
-.controller('ShoppingCtrl', function($scope, $ionicModal) {
+.controller('ShoppingCtrl', function($scope, $ionicModal, $rootScope) {
 
-  $scope.shoppings = [
-  	{ description: 'Eyedrops', price: '4', live: '4 days' },
-  	{ description: 'Bag', price: '20', live: '3 hours' },
-  ];
+
+  $scope.shoppings = $rootScope.shoppingList;
 
   $scope.editItem = function() {
     console.log("Editing");
@@ -123,8 +159,3 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('FavorCtrl', function($scope, $stateParams) {
-  $scope.favorDel = function(){
-    console.log("DELETE FAVOR IN VIEW");
-  }
-});

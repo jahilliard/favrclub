@@ -4,7 +4,7 @@
     <ion-nav-buttons side="left">
     	<button class="button button-icon button-clear ion-navicon" menu-toggle="left"> </button>
 	   </ion-nav-buttons>
-     <ion-nav-buttons ng-click="openModal()" href="templates/mylongform.html" side="right">
+     <ion-nav-buttons ng-click="openModal()" side="right">
        <button ng-click="openModal()" class="button button-icon button-clear ion-ios-compose-outline" menu-toggle="right"> </button>
      </ion-nav-buttons>
   </ion-nav-bar>
@@ -21,8 +21,8 @@
       <ion-refresher pulling-text= "Pull to refresh" on-refresh = "doRefresh()">
       </ion-refresher>
 
-      <div ng-repeat="favor in favors" href="#/app/favors/{{favor.id}}">
-        <a class="item item-avatar" href="#/app/favors/{{favor.id}}">
+      <div ng-repeat="favor in favors" href="#/app/favors/{{favor1.id}}">
+        <a class="item item-avatar" href="#/app/favors/{{favor1.id}}">
 	      <img src="img/weikun.jpg">
 	      <h2>{{favor.username}}</h2>
 	      <p>{{favor.item}}<br>
